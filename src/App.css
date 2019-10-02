@@ -1,0 +1,58 @@
+body{
+   /* text-align: center  */
+}
+
+
+#root{
+
+  min-width: 550px;
+  max-width: 850px;
+  min-height:550px;
+ 
+  margin: auto;
+  padding:40;
+  border: 10px solid aliceblue;
+  font: 14px
+
+}
+a {
+  padding-top: 20px;
+  
+  
+}
+
+
+
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.tab{
+  float: left;
+  margin:20px;
+  height: 25px;
+  list-style-type: none;
+  display: block;
+}
+.tab-content{
+  clear: both;  /* 前面的div是左靠齐的，下一个div会自动补齐，处于同一行。  清除，换行 */
+  display:block;
+  border:1px solid black;
+}
+
+.tab-content-active{
+display:block;
+
+}
+.tab-content-inactive{
+  display:none;
+}
