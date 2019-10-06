@@ -4,17 +4,28 @@ import {Tabs} from 'antd';
 
  import DeployTemplate from './DeployImage';
  import ManageTestCaseTab from './ManageCaseTab';
+ import {Provider,Connect} from 'react-redux';
+ import * as visionActions from './store/visionActions';
+ import {connect} from 'react-redux';
+ import { bindActionCreators } from "redux";
 
  const  {TabPane}  = Tabs;
 
 class Vision extends React.Component{
     constructor(props){
         super(props);
-        this.state={visionName:''};
-        this.state.visionName=this.props.match.params.visionName; // get the vision name
-        this.state.activeKey=1;
+    //   this.state={visionName:''};
+       // this.state.visionName=this.props.match.params.visionName; // get the vision name
+    this.state={activeKeyd:133333333333};    //this.state is the state of component itself
     }
-
+  
+// componentWillMount=()=>{
+// this.reloadVision();
+// }
+// reloadVision=()=>{
+//     const visionName=this.props.match.params.visionName;
+//     this.props.visionActions.loadSelectedVision(visionName);
+// }
     
     callback=function callback(key){
       
@@ -27,11 +38,12 @@ class Vision extends React.Component{
     render(){
         return(
            <div>
+               <p>{this.state.activeKeyd}</p>
                <h1>Manage MVT</h1>
-               <h3>{this.state.visionName}</h3>
-               <p>media:</p>
-               <p>status:</p>
-               <p>vm:win2016-en-lv3</p>
+               <h3>{this.props.vision.name}</h3>
+               <p>media:{this.props.vision.id}</p>
+               <p>status:{this.props.status}</p>
+               <p>vm:{this.props.vm}</p>
                <button>Refresh</button>
                <div className="tab-header">
                     <ul>
@@ -50,9 +62,6 @@ class Vision extends React.Component{
                         </ul>
 
                </div>
-
-
-              
                
                 <div class="tab-content">
                     <div className={"tab-content"+(this.state.activeKey===1?'-active':'-inactive')}>
@@ -61,7 +70,7 @@ class Vision extends React.Component{
                     <div className={"tab-content"+(this.state.activeKey===2?'-active':'-inactive')}> Content of Tab 2</div>
                     <div className={"tab-content"+(this.state.activeKey===3?'-active':'-inactive')}> Content of Tab 3</div>
                     <div className={"tab-content"+(this.state.activeKey===4?'-active':'-inactive')}>
-                        <ManageTestCaseTab/>
+                        <ManageTestCaseTab />
                     </div>
                 </div>
               
@@ -71,4 +80,22 @@ class Vision extends React.Component{
         )
         }
 }
-export default Vision;
+//  Vision.defaultProps={
+//      activeKey:1
+//  }
+function mapStateToProps(state,ownProps){ //state in function mapStateToProps is the state in store, shared by all child components
+    return {
+        
+        vision:state.visionsReducer,
+        activeKey:state.reducer.showMsg
+
+    }
+
+}
+function mapDispatchToProps(dispatch){
+    return{
+        visionActions:bindActionCreators(visionActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Vision);

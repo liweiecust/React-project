@@ -5,7 +5,9 @@ const defaultState={
     list:[1,2],
     showMsg:false
 }
-export default (state=defaultState,action)=>{
+
+
+ export default (state=defaultState,action)=>{
     if(action.type===change_input_value){
         const newState=JSON.parse(JSON.stringify(state));
         newState.inputValue=action.value;
@@ -26,4 +28,4 @@ export default (state=defaultState,action)=>{
     }
 
     return state;
-}
+} 

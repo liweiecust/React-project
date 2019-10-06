@@ -1,36 +1,114 @@
 import React from 'react';
-import ReactTable from 'react-table'
+import ReactTable from 'react-table';
+import {
+    Row
+} from 'antd';
+import {
+    connect
+} from 'react-redux';
+import visionApi from './visionApi';
+import { bindActionCreators } from 'C:/Users/liwe/AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux';
+import store from './store/store';
+import * as visionAction from './store/visionActions';
 
-class ManageCaseTable extends React.Component{
-
-    render(){
-       const columns=[
-            {
-                Header:"ID",
-            accessor: "Description",
-            },
-            {Header:"Description",
-            accessor: "Description",
-       
-
-            },
-            {
-                Header:"Time Saving",
-                accessor: "Description",
-              
-            }
-        ];
-        return(
+class ManageCaseTable extends React.Component {
+    constructor(props) {
+        super(props);
+    //store.subscribe=this.handleStoreChange;
+    }
+    // handleStoreChange=()=>{
+    //     this.setState(store.getState());
+    // }
+   
+    getState = () => {
+        return {
+            cases: [{
+                    ID: "id3",
+                    Description: "des",
+                    Time: "3"
+                },
+                {
+                    ID: "id3",
+                    Description: "des",
+                    Time: "3"
+                },
+                {
+                    ID: "id3",
+                    Description: "des",
+                    Time: "3"
+                },
+                {
+                    ID: "id3",
+                    Description: "des",
+                    Time: "3"
+                },
+                {
+                    ID: "id3",
+                    Description: "des",
+                    Time: "3"
+                },
+            ]
+        };
+    }
+     componentWillMount(){
+        //store.dispatch({type:"loadTestCase",value:"a1pe mvt project_Deployment_Automated"});
+        // should load case first, then dispatch action to reducer to update state !!!
+        this.props.actions.loadTestCase("a1pe mvt project_Deployment_Automated");
+     }
+    AddCase=()=>{
+        // store.dispatch({type:"addcase",value:{ID:"New Case",Description:"description",Time:"0"}})
+        this.props.actions.addCase(this.props.cases1);
+    }
+    render() {
+        return ( 
             <div>
-                <button>Add Case</button>
-                <ReactTable 
-                data={[{Header:"df",accessor:"df"},{Header:"df",accessor:"df"}]}
-                columns={columns}
-                    className="-striped -highlight">
+                <p>{this.props.case1.Id}</p>
+            <button onClick={this.AddCase}> Add Case </button> 
+            <table style = {
+                {
+                    border: 1
+                },
+                {
+                    columnRuleStyle: Row
+                }
+            } >
+            <thead>
+            <tr>
+            <th> ID </th> 
+            <th> Description </th> 
+            <th > Time saving(min) </th>
+            </tr>
+             </thead> 
+             <tbody> {
+                this.props.cases1.map(cases =>
+                    <tr>
+                    <td> {cases.id} </td>
+                     <td> {cases.Description} </td> 
+                     <td> {cases.time_saving_hour} </td> 
+                     </tr>
 
-                </ReactTable>
+                )
+            }
+
+            </tbody>  
+            </table> 
             </div>
         )
     }
 }
-export default ManageCaseTable;
+
+function mapStateToProps(state) {
+    return {
+        cases1:state.visionsReducer.cases,
+        case1:state.visionsReducer.case2
+    }
+
+}
+
+function mapDispatchToProps(dispatch) {
+    return{
+        actions:bindActionCreators(visionAction,dispatch)
+    }
+
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ManageCaseTable);

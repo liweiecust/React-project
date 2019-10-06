@@ -6,7 +6,7 @@ import About from './About';
 import Inbox from './Inbox';
 import {Router,Switch,Route,BrowserRouter,Link} from 'react-router-dom';
 import {Provider} from 'react-redux';
-import Store from './store/store'
+import store from './store/store'
 import Header from './Header';
 import App from './App';
 import Projects from './Projects';
@@ -14,7 +14,7 @@ import './App.css';
 import MU from './Menu';
 import App2 from './LayoutDemo';
 import Vision from './Vision';
-import { jsxOpeningElement } from '@babel/types';
+
 {/* <Router>
     <Route path="/" component={App}>
         <Route path="about" component={About}/>
@@ -26,21 +26,25 @@ import { jsxOpeningElement } from '@babel/types';
 
 
 ReactDOM.render(
- 
-        <BrowserRouter> {/*browerHistory is no longer supported from react-router version 4.*/}
+    <Provider store={store}>
+         <BrowserRouter> {/*browerHistory is no longer supported from react-router version 4.*/}
            
-            <App>
-                <Route path='/Home' component={Home}/>
-                <Route path="/All Projects" component={Projects}/>
-                <Route path="/Create MVT" component={Inbox}/>
-                <Route path="/about" component={About}/>
-                <Route path='/vision/:visionName' component={Vision}/>
+           <App>
+               <Route path='/Home' component={Home}/>
+               <Route path="/All Projects" component={Projects}/>
+               <Route path="/Create MVT" component={Inbox}/>
+               <Route path="/about" component={About}/>
+               <Route path='/vision/:visionName' component={Vision}/>
 
-            </App>
-           
+           </App>
           
-            
-        </BrowserRouter>
+         
+           
+       </BrowserRouter>
+
+    </Provider>
+ 
+       
 /* 
 {/* <Route exact path="/" component={Home}/>
 <Route path="/about" component={About}/>

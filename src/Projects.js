@@ -1,39 +1,29 @@
 import React from 'react';
 import {List} from 'antd';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {loadVisions} from './store/visionActions';
+import store from './store/store';
 
 class Projects extends React.Component{
 
     constructor(props){
         super(props);
-        this.state=this.getInitialState;
+        // this.state=this.getInitialState;
+        //this.state=(store.getState()).visionsReducer;
+        store.subscribe(this.handleStoreChange);
+       
     }
-    getInitialState={
-        list: [
-            {
-                id:"1",
-                name:"APM_Chef",
-                note:"Prepare daily APM image",
-                status:"offline"
-            },
-            {
-                id:"1",
-                name:"APM Deployment for AFR QE in HQDEVBLADE28",
-                note:"ProMV Deployment for Bedford RD team and QE in Mvt2-pro-d1",
-                status:"offline"
-            },
-            {
-                id:"1",
-                name:"MTELL_Deployment",
-                note:"ProMV Deployment for Bedford RD team and QE in Mvt2-pro-d1",
-                status:"offline"
-            }
-
-        ]
+     
+    handleStoreChange=()=>{
+        this.setState(store.getState());
     }
        
-       
-    
+      /*  componentWillMount(){
+        this.setState(store.getState());
+       }
+     */
    render(){
        return(
           <div>
@@ -49,13 +39,13 @@ class Projects extends React.Component{
                         <th>Status</th>
                     </thead>
                     <tbody style={{textalign:"left"}}>
-                        {this.state.list.map(vision=>(<tr>
+                         {this.props.lists.map(vision=>(<tr>
                         
                             <td>
                                 <Link to={"/vision/"+vision.name}>{vision.name}</Link></td>
                             <td>{vision.note}</td>
                             <td>{vision.status}</td>
-                            </tr>))}
+                            </tr>))} 
                     </tbody>
                 </table>
               
@@ -66,4 +56,16 @@ class Projects extends React.Component{
 
    
 }
-export default Projects;
+function mapStateToProps(state,ownProps) {
+    return{
+        lists:state.visionsReducer.lists
+
+    }
+     
+}
+function mapDispatchToProps(dispatch){
+    return{
+        type:"load_visions"
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Projects);
