@@ -15,17 +15,17 @@ class Vision extends React.Component{
     constructor(props){
         super(props);
     //   this.state={visionName:''};
-       // this.state.visionName=this.props.match.params.visionName; // get the vision name
-    this.state={activeKeyd:133333333333};    //this.state is the state of component itself
+     //this.state.visionName=this.props.match.params.visionName; // get the vision name
+     this.state={activeKeyd:133333333333};    //this.state is the state of component itself
     }
   
-// componentWillMount=()=>{
-// this.reloadVision();
-// }
-// reloadVision=()=>{
-//     const visionName=this.props.match.params.visionName;
-//     this.props.visionActions.loadSelectedVision(visionName);
-// }
+componentWillMount=()=>{
+    this.reloadVision();
+}
+reloadVision=()=>{
+    const visionName=this.props.match.params.visionName;
+    this.props.visionActions.loadVision(visionName);
+}
     
     callback=function callback(key){
       
@@ -41,9 +41,10 @@ class Vision extends React.Component{
                <p>{this.state.activeKeyd}</p>
                <h1>Manage MVT</h1>
                <h3>{this.props.vision.name}</h3>
-               <p>media:{this.props.vision.id}</p>
-               <p>status:{this.props.status}</p>
-               <p>vm:{this.props.vm}</p>
+               <p>Note:{this.props.vision.note}</p>
+               <p>media:{this.props.vision.media}</p>
+               <p>status:{this.props.vision.status}</p>
+               {/* <p>vm:{(this.props.vision.project_schedule)[0].machine_demand.dorm.name}</p> */}
                <button>Refresh</button>
                <div className="tab-header">
                     <ul>
@@ -86,7 +87,7 @@ class Vision extends React.Component{
 function mapStateToProps(state,ownProps){ //state in function mapStateToProps is the state in store, shared by all child components
     return {
         
-        vision:state.visionsReducer,
+        vision:state.visionsReducer.vision,
         activeKey:state.reducer.showMsg
 
     }

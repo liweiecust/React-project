@@ -29,15 +29,15 @@ const visions={
             }
 
         ],
-        vision:{
-            Id:"12",
-            name:"MTELL_Deployment",
-            note:"ProMV Deployment for Bedford RD team and QE in Mvt2-pro-d1",
-            status:"offline",
-            media:"RC123"
-          
+    vision:{
+        Id:"12",
+        name:"MTELL_Deployment",
+        note:"ProMV Deployment for Bedford RD team and QE in Mvt2-pro-d1",
+        status:"offline",
+        media:"RC123"
+        
 
-        },
+    },
     cases:[
         {
             Id:"dddfssfsd",
@@ -83,6 +83,12 @@ export default (state=visions,action)=>{
         const newState=Object.assign({},state);
         newState.cases=[...action.value,
             {Id:"New Case",Description:"description",Time:"0"}];
+        return newState;
+    }
+    else if(action.type==="loadVision")
+    {
+        const newState=Object.assign({},state);
+        newState.vision=action.value;
         return newState;
     }
     

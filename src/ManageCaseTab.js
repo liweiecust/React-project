@@ -53,7 +53,8 @@ class ManageCaseTable extends React.Component {
      componentWillMount(){
         //store.dispatch({type:"loadTestCase",value:"a1pe mvt project_Deployment_Automated"});
         // should load case first, then dispatch action to reducer to update state !!!
-        this.props.actions.loadTestCase("a1pe mvt project_Deployment_Automated");
+        //this.props.actions.loadTestCase("a1pe mvt project_Deployment_Automated");
+        this.props.actions.loadTestCase("MES MVT");
      }
     AddCase=()=>{
         // store.dispatch({type:"addcase",value:{ID:"New Case",Description:"description",Time:"0"}})

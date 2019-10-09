@@ -43,15 +43,23 @@ export function addCase(testcase){
 }
 export function loadTestCase(blueprint){
 
-return function(dispatch){
-    return  visionApi.loadTestCases(blueprint)
-    .then(testcases=>{
-        dispatch({type:"loadTestCase",value:testcases}) // use middleware for asynchrous request
-    })
-    .catch(err=>{
-        throw err;
-    }); 
+    return function(dispatch){
+        return  visionApi.loadTestCases(blueprint)
+        .then(testcases=>{
+            dispatch({type:"loadTestCase",value:testcases}) // use middleware for asynchrous request
+        })
+        .catch(err=>{
+            throw err;
+        }); 
 
+    } 
 }
-     
+
+export function loadVision(visionName){
+    return function(dispatch){
+        return visionApi.loadVision(visionName)
+        .then(vision=>{
+            dispatch({type:"loadvision",value:vision})
+        })
+    }
 }
