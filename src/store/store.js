@@ -12,7 +12,7 @@ const reducers=combineReducers({reducer,visionsReducer});
 //const store=createStore(reducers,composeWithDevTools());
 const store=createStore(
   reducers,
-  storeEnhancer(applyMiddleware(thunk)))
+  composeWithDevTools(applyMiddleware(thunk)))
 export default store;
 
 

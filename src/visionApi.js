@@ -17,6 +17,18 @@ class VisionApi{
         })
      
     }
+    static loadVision(visionName){
+        return new Promise((resolve,reject)=>{
+            axios.get(server+"/api/registry/vision/"+visionName)
+            .then(res=>{
+                console.log(res);
+                resolve(JSON.parse(res.data));
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        })
+    }
 
 }
 export default VisionApi

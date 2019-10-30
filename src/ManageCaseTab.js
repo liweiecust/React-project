@@ -7,7 +7,7 @@ import {
     connect
 } from 'react-redux';
 import visionApi from './visionApi';
-import { bindActionCreators } from 'C:/Users/liwe/AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux';
+import { bindActionCreators } from 'redux';
 import store from './store/store';
 import * as visionAction from './store/visionActions';
 
@@ -53,7 +53,8 @@ class ManageCaseTable extends React.Component {
      componentWillMount(){
         //store.dispatch({type:"loadTestCase",value:"a1pe mvt project_Deployment_Automated"});
         // should load case first, then dispatch action to reducer to update state !!!
-        this.props.actions.loadTestCase("a1pe mvt project_Deployment_Automated");
+        //this.props.actions.loadTestCase("a1pe mvt project_Deployment_Automated");
+        this.props.actions.loadTestCase("MES MVT");
      }
     AddCase=()=>{
         // store.dispatch({type:"addcase",value:{ID:"New Case",Description:"description",Time:"0"}})
