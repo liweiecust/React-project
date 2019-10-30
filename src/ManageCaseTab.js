@@ -7,7 +7,7 @@ import {
     connect
 } from 'react-redux';
 import visionApi from './visionApi';
-import { bindActionCreators } from 'C:/Users/liwe/AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux';
+import { bindActionCreators } from 'redux';
 import store from './store/store';
 import * as visionAction from './store/visionActions';
 
